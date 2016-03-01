@@ -1,0 +1,50 @@
+Electron electron;
+
+float nX, nY, nR;
+
+void setup() {
+  size(1000, 800);
+  smooth();
+
+  nX = 500;
+  nY = 400;
+  nR = 50;
+
+  electron = new Electron();
+}
+
+void draw() {
+  background(155);
+  element();
+
+  electron.display();
+  electron.move();
+}
+
+void element() {
+  ellipseMode(RADIUS);
+  ellipse(nX, nY, nR, nR);
+}
+
+class Electron {
+  float eX, eY, eW, eH;
+  float r= 300;
+  float theta=  atan( (eY-nY)  / (eX-nX)  );
+
+  Electron () {
+    eX= nX + r*cos(theta);
+    eY= nY + r*sin(theta);
+    eW= 20;
+    eH= 20;
+}
+
+void display() {
+  noStroke();
+  ellipse(eX, eY, eW, eH);
+  }
+  
+void move() {
+    eX= (nX + r*cos(theta)) + 1;
+    eY= (nY + r*sin(theta)) + 1;  
+}
+}
